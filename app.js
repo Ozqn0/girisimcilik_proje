@@ -120,7 +120,7 @@ function saveStateToStorage() {
 function detectAndRoutePage() {
     const path = window.location.pathname;
     
-    if (path.includes("plan_ekle.html")) {
+    if (path.includes("plan_ekle")) {
         const deptSelect = document.getElementById("plan-department");
         const respSelect = document.getElementById("plan-responsible");
         if (deptSelect && respSelect) {
@@ -153,7 +153,7 @@ function detectAndRoutePage() {
             // Listen for changes
             deptSelect.addEventListener("change", updateResponsiblesDropdown);
         }
-    } else if (path.includes("durum_sorgula.html")) {
+    } else if (path.includes("durum_sorgula")) {
         // Durum sorgula page loaded
         // Proactively check if there's a code in URL query string (optional bonus feature)
         const urlParams = new URLSearchParams(window.location.search);
@@ -162,9 +162,9 @@ function detectAndRoutePage() {
             document.getElementById("tracking-code-input").value = codeParam;
             queryPlanStatus();
         }
-    } else if (path.includes("admin_paneli.html")) {
+    } else if (path.includes("admin_paneli")) {
         // Admin panel loaded
-        renderAdminDashboard();
+        checkAdminAuth();
     }
 }
 
