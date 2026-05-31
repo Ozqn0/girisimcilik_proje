@@ -44,67 +44,75 @@ function initializeApp() {
         try {
             state.plans = JSON.parse(savedPlans);
             
-            // Migrate old assignments/departments to new randomized scheme
-            let modified = false;
-            const oldToNewMapping = {
-                "Sevenç (Ofset Baskı)": "Batuhan (Ofset Baskı)",
-                "Ozan Yusuf (Dijital Baskı)": "Halil (Dijital Baskı)",
-                "Mehmet (Serigrafi (Elek) Baskı)": "Ozan Yusuf (Serigrafi (Elek) Baskı)",
-                "Batuhan (Flekso Baskı)": "Sevenç (Flekso Baskı)",
-                "Halil (Tifdruk (Çukur) Baskı)": "Mehmet (Tifdruk (Çukur) Baskı)",
-                "Ozan Yusuf (Dizgi&Tasarım)": "Ozan Yusuf (Serigrafi (Elek) Baskı)",
-                "Mehmet (Renk Kalıbı Hazırlama)": "Mehmet (Tifdruk (Çukur) Baskı)",
-                "Batuhan (Mücellithane (Ciltleme))": "Sevenç (Flekso Baskı)",
-                "Halil (Yönetim/Sevkiyat)": "Halil (Dijital Baskı)"
-            };
+            // Check if we need to run migration to schema version 2 (introducing new usta names and new status keys)
+            const schemaVersion = localStorage.getItem("taskflow_schema_version");
+            if (schemaVersion !== "2") {
+                let modified = false;
+                const oldToNewMapping = {
+                    "Sevenç (Ofset Baskı)": "Batuhan (Ofset Baskı)",
+                    "Ozan Yusuf (Dijital Baskı)": "Halil (Dijital Baskı)",
+                    "Mehmet (Serigrafi (Elek) Baskı)": "Ozan Yusuf (Serigrafi (Elek) Baskı)",
+                    "Batuhan (Flekso Baskı)": "Sevenç (Flekso Baskı)",
+                    "Halil (Tifdruk (Çukur) Baskı)": "Mehmet (Tifdruk (Çukur) Baskı)",
+                    "Ozan Yusuf (Dizgi&Tasarım)": "Ozan Yusuf (Serigrafi (Elek) Baskı)",
+                    "Mehmet (Renk Kalıbı Hazırlama)": "Mehmet (Tifdruk (Çukur) Baskı)",
+                    "Batuhan (Mücellithane (Ciltleme))": "Sevenç (Flekso Baskı)",
+                    "Halil (Yönetim/Sevkiyat)": "Halil (Dijital Baskı)"
+                };
 
-            state.plans.forEach(plan => {
-                if (oldToNewMapping[plan.responsible]) {
-                    plan.responsible = oldToNewMapping[plan.responsible];
-                    modified = true;
+                state.plans.forEach(plan => {
+                    if (oldToNewMapping[plan.responsible]) {
+                        plan.responsible = oldToNewMapping[plan.responsible];
+                        modified = true;
+                    }
+                    
+                    // Strip parentheses from responsible names: "Batuhan (Ofset Baskı)" -> "Batuhan"
+                    if (plan.responsible && plan.responsible.includes("(")) {
+                        plan.responsible = plan.responsible.split("(")[0].trim();
+                        modified = true;
+                    }
+                    
+                    // Keep department synced with responsible's registered department
+                    const ustaObj = state.responsibles.find(r => r.name.toLowerCase() === plan.responsible.toLowerCase());
+                    if (ustaObj && plan.department !== ustaObj.department) {
+                        plan.department = ustaObj.department;
+                        modified = true;
+                    }
+
+                    // Migrate old statuses to new process stages
+                    if (plan.status === "tamamlandi") {
+                        plan.status = "teslim_edildi";
+                        modified = true;
+                    } else if (plan.status === "devreye_sokma") {
+                        plan.status = "tamamlandi";
+                        modified = true;
+                    } else if (plan.status === "duzenleme") {
+                        plan.status = "olusturuluyor";
+                        modified = true;
+                    } else if (plan.status === "planlama") {
+                        plan.status = "iletiliyor";
+                        modified = true;
+                    }
+                });
+
+                if (modified) {
+                    saveStateToStorage();
                 }
                 
-                // Strip parentheses from responsible names: "Batuhan (Ofset Baskı)" -> "Batuhan"
-                if (plan.responsible && plan.responsible.includes("(")) {
-                    plan.responsible = plan.responsible.split("(")[0].trim();
-                    modified = true;
-                }
-                
-                // Keep department synced with responsible's registered department
-                const ustaObj = state.responsibles.find(r => r.name.toLowerCase() === plan.responsible.toLowerCase());
-                if (ustaObj && plan.department !== ustaObj.department) {
-                    plan.department = ustaObj.department;
-                    modified = true;
-                }
-
-                // Migrate old statuses to new process stages
-                if (plan.status === "tamamlandi") {
-                    plan.status = "teslim_edildi";
-                    modified = true;
-                } else if (plan.status === "devreye_sokma") {
-                    plan.status = "tamamlandi";
-                    modified = true;
-                } else if (plan.status === "duzenleme") {
-                    plan.status = "olusturuluyor";
-                    modified = true;
-                } else if (plan.status === "planlama") {
-                    plan.status = "iletiliyor";
-                    modified = true;
-                }
-            });
-
-            if (modified) {
-                saveStateToStorage();
+                // Mark migration as completed so it never runs again
+                localStorage.setItem("taskflow_schema_version", "2");
             }
         } catch (e) {
             console.error("Error parsing localStorage plans", e);
             state.plans = [...defaultPlans];
             saveStateToStorage();
+            localStorage.setItem("taskflow_schema_version", "2");
         }
     } else {
         // First run, populate with default sample data
         state.plans = [...defaultPlans];
         saveStateToStorage();
+        localStorage.setItem("taskflow_schema_version", "2");
     }
 
     // Detect Page and run specific logic
