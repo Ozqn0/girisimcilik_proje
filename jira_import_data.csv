@@ -1,0 +1,47 @@
+"Issue ID","Issue Type","Summary","Description","Epic Name","Epic Link","Story Points","Priority","Link 'is blocked by'"
+"1","Epic","Masa Rezervasyonu Modülü","Kullanıcıların ofis içerisindeki masaları interaktif olarak görüntüleyebileceği, durumlarını takip edebileceği ve rezervasyon işlemlerini gerçekleştirebileceği modül.","Masa Rezervasyonu","","","High",""
+"2","Epic","Akıllı Ekip Senkronizasyon Takvimi","Ekip üyelerinin nerede çalıştığını takip etmeyi kolaylaştıran, durum güncellemeleri sağlayan ve ortak müsait saatleri analiz ederek toplantı planlamayı kolaylaştıran takvim modülü.","Akıllı Takvim","","","High",""
+"3","Epic","İK ve Yönetici Analitik Paneli","Ofis kaynaklarının kullanım oranlarını, departman bazlı yoğunlukları ve katılım trendlerini grafiklerle analiz etmeyi sağlayan yönetim paneli.","İK Paneli","","","Medium",""
+"4","Story","İnteraktif Kat Planı Arayüzü Tasarımı","Bir Kullanıcı olarak, ofis kat planını görsel bir ızgara şeklinde görmek istiyorum, böylece müsait ve dolu masaları anında ayırt edebilirim.
+
+Kabul Kriterleri:
+1. Kat planı sayfası açıldığında masalar grid yapıda listelenmeli.
+2. Boş masalar yeşil, dolu masalar kırmızı renkte gösterilmeli.
+3. Doluluk oranı (%) üst kısımda dinamik olarak güncellenmeli.","","Masa Rezervasyonu","5","High",""
+"5","Story","Masa Rezervasyonu Yapma ve İptal Etme","Bir Çalışan olarak, istediğim boş bir masaya tıklayarak rezervasyon yapabilmek ve kendi rezervasyonumu iptal edebilmek istiyorum, böylece ofise gideceğim gün çalışacağım yeri önceden garantiye alabilirim.
+
+Kabul Kriterleri:
+1. Boş masaya tıklandığında rezervasyon onay penceresi açılmalı.
+2. Onaylanan masanın durumu anında 'Dolu' (Kırmızı) olmalı ve doluluk oranı güncellenmeli.
+3. Kullanıcı kendi rezerve ettiği masaya tekrar tıklayarak rezervasyonu iptal edebilmeli.","","Masa Rezervasyonu","5","High","4"
+"6","Story","Ekip Üyelerinin Hibrit Çalışma Durum Kartları","Bir Ekip Üyesi olarak, iş arkadaşlarımın o günkü çalışma durumlarını (Remote, Ofiste, İzinli) takvimde görebilmek istiyorum, böylece kimin nerede çalıştığını bilip iletişimimi ona göre planlayabilirim.
+
+Kabul Kriterleri:
+1. Takvim sayfasında ekip listesi ve yanlarında durum ikonları (Ev, Ofis, İzin) yer almalı.
+2. Listede duruma göre (örn: sadece ofistekiler) filtreleme seçeneği bulunmalı.","","Akıllı Takvim","3","Medium",""
+"7","Story","Ortak Müsait Toplantı Saati Bulucu Simülatörü","Bir Toplantı Düzenleyicisi olarak, seçilen ekip üyelerinin müsait saatlerini karşılaştırarak ortak en uygun toplantı saatini otomatik bulmak istiyorum, böylece herkesin takvimini tek tek kontrol etmekle uğraşmam.
+
+Kabul Kriterleri:
+1. Toplantı için birden fazla ekip üyesi seçilebilmeli.
+2. 'Ortak Saat Bul' tıklandığında, seçilen kişilerin müsait olduğu en uygun 3 saat dilimi listelenmeli.
+3. Saat seçilip onaylandığında takvime eklenmeli.","","Akıllı Takvim","8","High","6"
+"8","Story","İK Paneli Ana Metrik Kartları","Bir İK Yöneticisi olarak, günlük/haftalık ofis doluluk oranı, en popüler kat/masa ve departman bazlı katılım metriklerini görmek istiyorum, böylece ofis kaynaklarının kullanımını hızlıca analiz edebilirim.
+
+Kabul Kriterleri:
+1. İK paneli açıldığında 'Toplam Doluluk Oranı', 'Aktif Rezervasyon Sayısı' ve 'En Yoğun Gün' gibi temel KPI kartları gösterilmeli.
+2. Veriler masa rezervasyon modülü ile anlık senkronize olmalı.","","İK Paneli","3","Medium",""
+"9","Story","Grafiklerle Departman Yoğunluk Analizi","Bir İK/Yönetici olarak, departmanların ofis kullanım oranlarını ve haftalık yoğunluk grafiklerini görsel olarak incelemek istiyorum, böylece hangi departmanın hangi günlerde ofisi daha yoğun kullandığını tespit edip kapasite planlaması yapabilirim.
+
+Kabul Kriterleri:
+1. Departman bazlı dağılımı gösteren bir dairesel/pasta (pie) grafik arayüzde bulunmalı.
+2. Haftalık doluluk trendini gösteren bir çizgi/sütun (line/bar) grafik yer almalı.
+3. Grafikler tamamen CSS/SVG ile dinamik çizilmeli.","","İK Paneli","5","Medium","8"
+"10","Story","Rezervasyon Sınırlandırmaları ve Çakışma Önleme","Bir Sistem Yöneticisi olarak, bir çalışanın aynı gün için birden fazla masa rezerve etmesini engellemek istiyorum, böylece haksız masa kullanımını ve kaynak israfını önleyebilirim.
+
+Kabul Kriterleri:
+1. Bir kullanıcının zaten aktif bir rezervasyonu varsa, başka bir masaya tıkladığında 'Zaten bir rezervasyonunuz bulunmaktadır' uyarısı çıkmalı ve işlem engellenmeli.","","Masa Rezervasyonu","3","High","5"
+"11","Story","Profil Üzerinden Günlük Çalışma Durumu Güncelleme","Bir Çalışan olarak, günlük çalışma durumumu (Remote, In-Office, Leave) profil panelimden hızlıca değiştirebilmek istiyorum, böylece ekibim benim nerede olduğumu anlık olarak görebilir.
+
+Kabul Kriterleri:
+1. Kullanıcı profil kartındaki açılır menüden durumunu güncelleyebilmeli.
+2. Güncelleme yapıldığında ekip takvimindeki durum ikonu ve İK analitik verileri anında değişmeli.","","Akıllı Takvim","3","High","6"

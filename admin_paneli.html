@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetici Konsolu | TaskFlow Press</title>
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="press-theme">
+    
+    <!-- Top CMYK Calibration Color Bar -->
+    <div class="cmyk-calibration-bar">
+        <span class="cmyk-cyan"></span>
+        <span class="cmyk-magenta"></span>
+        <span class="cmyk-yellow"></span>
+        <span class="cmyk-key"></span>
+        <span class="cmyk-cyan-light"></span>
+        <span class="cmyk-magenta-light"></span>
+        <span class="cmyk-yellow-light"></span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="press-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="brand-logo-stamp">🖨️</div>
+                <div class="brand-text-wrapper">
+                    <span class="brand-title">TaskFlow Press</span>
+                    <span class="brand-subtitle">Mücellithane & Baskı Evi</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="plan_ekle.html" class="nav-link">Sipariş Oluştur</a>
+                <a href="durum_sorgula.html" class="nav-link">Baskı Durumu Sorgula</a>
+                <a href="admin_paneli.html" class="nav-link active">Yönetici Konsolu</a>
+            </div>
+            <div class="nav-cta">
+                <a href="plan_ekle.html" class="btn btn-ink">Sipariş Oluştur</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="page-main">
+        <section class="section-container">
+            
+            <!-- Login Gate -->
+            <div id="admin-login-gate" class="press-form-container" style="max-width: 400px; margin: 40px auto;">
+                <div class="form-border-double">
+                    <div class="form-header-stamped">
+                        <h2>🔑 YÖNETİCİ GİRİŞİ</h2>
+                        <p>Yönetici Konsolu'na erişmek için yetkili kimlik bilgilerini doğrulayın.</p>
+                        <div class="cmyk-dots-strip">
+                            <span class="cmyk-dot-micro cyan"></span>
+                            <span class="cmyk-dot-micro magenta"></span>
+                            <span class="cmyk-dot-micro yellow"></span>
+                            <span class="cmyk-dot-micro key"></span>
+                        </div>
+                    </div>
+                    
+                    <form id="admin-login-form" class="press-paper-form" onsubmit="handleAdminLogin(event)" style="padding: 20px;">
+                        <div class="form-group">
+                            <label for="login-username">Kullanıcı Adı</label>
+                            <input type="text" id="login-username" required style="width: 100%;">
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="login-password">Şifre</label>
+                            <input type="password" id="login-password" required style="width: 100%;">
+                        </div>
+                        <div id="login-error-msg" style="color: var(--color-cmyk-m); font-weight: bold; margin-top: 15px; font-size: 13px; text-align: center;" class="hidden">
+                            ⚠️ Hatalı kullanıcı adı veya şifre!
+                        </div>
+                        <button type="submit" class="btn btn-ink btn-full" style="margin-top: 20px; width: 100%;">Giriş Yap</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="admin-dashboard-content" class="press-admin-wrapper hidden">
+                
+                <div class="admin-header-row-press">
+                    <div class="header-titles">
+                        <h2>🛠️ Baskı Aşamaları Yönetim Konsolu</h2>
+                        <p>Matbaadaki aktif siparişlerin kalıp durumlarını (CMYK) güncelleyin veya yeni sipariş oluşturun.</p>
+                    </div>
+                    <div class="header-action" style="display: flex; gap: 10px;">
+                        <a href="plan_ekle.html" class="btn btn-ink">➕ Yeni Sipariş Oluştur</a>
+                        <button class="btn btn-ink-outline" onclick="handleAdminLogout()">🚪 Çıkış Yap</button>
+                    </div>
+                </div>
+
+                <!-- Ledger Metrics Row (Kagit Destesi Gorunumlu Metrik Kartlari) -->
+                <div class="press-metrics-row">
+                    <div class="ledger-metric-card">
+                        <span class="metric-lbl">Toplam Sipariş</span>
+                        <span class="metric-num" id="total-plans-count">0</span>
+                    </div>
+                    <div class="ledger-metric-card border-c">
+                        <span class="metric-lbl">Departmana İletiliyor (Cyan)</span>
+                        <span class="metric-num text-cyan" id="todo-plans-count">0</span>
+                    </div>
+                    <div class="ledger-metric-card border-m">
+                        <span class="metric-lbl">Sipariş Oluşturuluyor (Magenta)</span>
+                        <span class="metric-num text-magenta" id="progress-plans-count">0</span>
+                    </div>
+                    <div class="ledger-metric-card border-y">
+                        <span class="metric-lbl">Sipariş Tamamlandı (Yellow)</span>
+                        <span class="metric-num text-yellow" id="deploy-plans-count">0</span>
+                    </div>
+                    <div class="ledger-metric-card border-k">
+                        <span class="metric-lbl">Sipariş Teslim Edildi (Key)</span>
+                        <span class="metric-num text-key" id="done-plans-count">0</span>
+                    </div>
+                </div>
+
+                <!-- Active Jobs Table Sheet (Is Emri Kayit Defteri) -->
+                <div class="press-table-card-container">
+                    <div class="card-border-double">
+                        <div class="table-card-header">
+                            <h3>📖 Sipariş Defteri</h3>
+                            <p>Sorumlu ustayı ve iş durumunu güncelleyerek durum sorgulama ekranına anında yansımasını sağlayın.</p>
+                        </div>
+                        
+                        <div class="press-table-wrapper">
+                            <table class="plans-management-table press-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sipariş Kodu</th>
+                                        <th>Sipariş Adı</th>
+                                        <th>Sorumlu Usta</th>
+                                        <th>Baskı Departmanı</th>
+                                        <th>Kalıp Durumu (CMYK)</th>
+                                        <th style="text-align: right;">Eylemler</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="plans-table-body">
+                                    <!-- Dynamic rows generated by app.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsible Persons Management Section (Usta Kayıt Defteri) -->
+                <div class="press-grid-two-cols" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px;">
+                    
+                    <!-- Left: Add New Responsible -->
+                    <div class="press-table-card-container">
+                        <div class="card-border-double" style="height: 100%;">
+                            <div class="table-card-header">
+                                <h3>👤 Yeni Baskı Ustası Ekle</h3>
+                                <p>Sisteme yeni bir usta tanımlayın. Tanımlanan usta, iş emri formunda ilgili departmanda seçilebilir olacaktır.</p>
+                            </div>
+                            
+                            <form id="add-responsible-form" class="press-paper-form" onsubmit="handleAddResponsible(event)" style="padding: 20px;">
+                                <div class="form-group">
+                                    <label for="new-responsible-name">Usta Adı Soyadı</label>
+                                    <input type="text" id="new-responsible-name" placeholder="Örn: Ahmet Yılmaz" required style="width: 100%;">
+                                </div>
+                                <div class="form-group" style="margin-top: 15px;">
+                                    <label for="new-responsible-dept">İlgilendiği Baskı Departmanı</label>
+                                    <select id="new-responsible-dept" required style="width: 100%;">
+                                        <option value="Ofset Baskı" selected>Ofset Baskı</option>
+                                        <option value="Dijital Baskı">Dijital Baskı</option>
+                                        <option value="Serigrafi (Elek) Baskı">Serigrafi (Elek) Baskı</option>
+                                        <option value="Flekso Baskı">Flekso Baskı</option>
+                                        <option value="Tifdruk (Çukur) Baskı">Tifdruk (Çukur) Baskı</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-ink btn-full" style="margin-top: 20px; width: 100%;">👤 Ustayı Kaydet ve Yetkilendir</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right: List of Responsibles -->
+                    <div class="press-table-card-container">
+                        <div class="card-border-double" style="height: 100%;">
+                            <div class="table-card-header">
+                                <h3>📖 Kayıtlı Ustalar Defteri</h3>
+                                <p>Sistemde yetkilendirilmiş matbaa ustalarını görün ve yönetin.</p>
+                            </div>
+                            
+                            <div class="press-table-wrapper" style="max-height: 250px; overflow-y: auto; padding: 10px;">
+                                <table class="press-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Usta Adı</th>
+                                            <th>Departman</th>
+                                            <th style="text-align: right;">İşlem</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="responsibles-table-body">
+                                        <!-- Dynamic rows generated by app.js -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="press-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <span class="footer-brand-text">TaskFlow Press</span>
+                <p>Matbaa ve Ofset Süreç Takip Sistemi</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2026 TaskFlow Press. Girişimcilik ve Proje Yönetimi Projesidir.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

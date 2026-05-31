@@ -1,0 +1,158 @@
+[
+  {
+    "id": 1,
+    "issueType": "Epic",
+    "summary": "Masa Rezervasyonu Modülü",
+    "description": "Kullanıcıların ofis içerisindeki masaları interaktif olarak görüntüleyebileceği, durumlarını takip edebileceği ve rezervasyon işlemlerini gerçekleştirebileceği modül.",
+    "epicName": "Masa Rezervasyonu",
+    "epicLink": "",
+    "storyPoints": null,
+    "priority": "High",
+    "blockedBy": []
+  },
+  {
+    "id": 2,
+    "issueType": "Epic",
+    "summary": "Akıllı Ekip Senkronizasyon Takvimi",
+    "description": "Ekip üyelerinin nerede çalıştığını takip etmeyi kolaylaştıran, durum güncellemeleri sağlayan ve ortak müsait saatleri analiz ederek toplantı planlamayı kolaylaştıran takvim modülü.",
+    "epicName": "Akıllı Takvim",
+    "epicLink": "",
+    "storyPoints": null,
+    "priority": "High",
+    "blockedBy": []
+  },
+  {
+    "id": 3,
+    "issueType": "Epic",
+    "summary": "İK ve Yönetici Analitik Paneli",
+    "description": "Ofis kaynaklarının kullanım oranlarını, departman bazlı yoğunlukları ve katılım trendlerini grafiklerle analiz etmeyi sağlayan yönetim paneli.",
+    "epicName": "İK Paneli",
+    "epicLink": "",
+    "storyPoints": null,
+    "priority": "Medium",
+    "blockedBy": []
+  },
+  {
+    "id": 4,
+    "issueType": "Story",
+    "summary": "İnteraktif Kat Planı Arayüzü Tasarımı",
+    "description": "Bir Kullanıcı olarak, ofis kat planını görsel bir ızgara şeklinde görmek istiyorum, böylece müsait ve dolu masaları anında ayırt edebilirim.",
+    "epicName": "",
+    "epicLink": "Masa Rezervasyonu",
+    "storyPoints": 5,
+    "priority": "High",
+    "blockedBy": [],
+    "acceptanceCriteria": [
+      "Kat planı sayfası açıldığında masalar grid yapıda listelenmeli.",
+      "Boş masalar yeşil, dolu masalar kırmızı renkte gösterilmeli.",
+      "Doluluk oranı (%) üst kısımda dinamik olarak güncellenmeli."
+    ]
+  },
+  {
+    "id": 5,
+    "issueType": "Story",
+    "summary": "Masa Rezervasyonu Yapma ve İptal Etme",
+    "description": "Bir Çalışan olarak, istediğim boş bir masaya tıklayarak rezervasyon yapabilmek ve kendi rezervasyonumu iptal edebilmek istiyorum, böylece ofise gideceğim gün çalışacağım yeri önceden garantiye alabilirim.",
+    "epicName": "",
+    "epicLink": "Masa Rezervasyonu",
+    "storyPoints": 5,
+    "priority": "High",
+    "blockedBy": [4],
+    "acceptanceCriteria": [
+      "Boş masaya tıklandığında rezervasyon onay penceresi açılmalı.",
+      "Onaylanan masanın durumu anında 'Dolu' (Kırmızı) olmalı ve doluluk oranı güncellenmeli.",
+      "Kullanıcı kendi rezerve ettiği masaya tekrar tıklayarak rezervasyonu iptal edebilmeli."
+    ]
+  },
+  {
+    "id": 6,
+    "issueType": "Story",
+    "summary": "Ekip Üyelerinin Hibrit Çalışma Durum Kartları",
+    "description": "Bir Ekip Üyesi olarak, iş arkadaşlarımın o günkü çalışma durumlarını (Remote, Ofiste, İzinli) takvimde görebilmek istiyorum, böylece kimin nerede çalıştığını bilip iletişimimi ona göre planlayabilirim.",
+    "epicName": "",
+    "epicLink": "Akıllı Takvim",
+    "storyPoints": 3,
+    "priority": "Medium",
+    "blockedBy": [],
+    "acceptanceCriteria": [
+      "Takvim sayfasında ekip listesi ve yanlarında durum ikonları (Ev, Ofis, İzin) yer almalı.",
+      "Listede duruma göre (örn: sadece ofistekiler) filtreleme seçeneği bulunmalı."
+    ]
+  },
+  {
+    "id": 7,
+    "issueType": "Story",
+    "summary": "Ortak Müsait Toplantı Saati Bulucu Simülatörü",
+    "description": "Bir Toplantı Düzenleyicisi olarak, seçilen ekip üyelerinin müsait saatlerini karşılaştırarak ortak en uygun toplantı saatini otomatik bulmak istiyorum, böylece herkesin takvimini tek tek kontrol etmekle uğraşmam.",
+    "epicName": "",
+    "epicLink": "Akıllı Takvim",
+    "storyPoints": 8,
+    "priority": "High",
+    "blockedBy": [6],
+    "acceptanceCriteria": [
+      "Toplantı için birden fazla ekip üyesi seçilebilmeli.",
+      "'Ortak Saat Bul' tıklandığında, seçilen kişilerin müsait olduğu en uygun 3 saat dilimi listelenmeli.",
+      "Saat seçilip onaylandığında takvime eklenmeli."
+    ]
+  },
+  {
+    "id": 8,
+    "issueType": "Story",
+    "summary": "İK Paneli Ana Metrik Kartları",
+    "description": "Bir İK Yöneticisi olarak, günlük/haftalık ofis doluluk oranı, en popüler kat/masa ve departman bazlı katılım metriklerini görmek istiyorum, böylece ofis kaynaklarının kullanımını hızlıca analiz edebilirim.",
+    "epicName": "",
+    "epicLink": "İK Paneli",
+    "storyPoints": 3,
+    "priority": "Medium",
+    "blockedBy": [],
+    "acceptanceCriteria": [
+      "İK paneli açıldığında 'Toplam Doluluk Oranı', 'Aktif Rezervasyon Sayısı' ve 'En Yoğun Gün' gibi temel KPI kartları gösterilmeli.",
+      "Veriler masa rezervasyon modülü ile anlık senkronize olmalı."
+    ]
+  },
+  {
+    "id": 9,
+    "issueType": "Story",
+    "summary": "Grafiklerle Departman Yoğunluk Analizi",
+    "description": "Bir İK/Yönetici olarak, departmanların ofis kullanım oranlarını ve haftalık yoğunluk grafiklerini görsel olarak incelemek istiyorum, böylece hangi departmanın hangi günlerde ofisi daha yoğun kullandığını tespit edip kapasite planlaması yapabilirim.",
+    "epicName": "",
+    "epicLink": "İK Paneli",
+    "storyPoints": 5,
+    "priority": "Medium",
+    "blockedBy": [8],
+    "acceptanceCriteria": [
+      "Departman bazlı dağılımı gösteren bir dairesel/pasta (pie) grafik arayüzde bulunmalı.",
+      "Haftalık doluluk trendini gösteren bir çizgi/sütun (line/bar) grafik yer almalı.",
+      "Grafikler tamamen CSS/SVG ile dinamik çizilmeli."
+    ]
+  },
+  {
+    "id": 10,
+    "issueType": "Story",
+    "summary": "Rezervasyon Sınırlandırmaları ve Çakışma Önleme",
+    "description": "Bir Sistem Yöneticisi olarak, bir çalışanın aynı gün için birden fazla masa rezerve etmesini engellemek istiyorum, böylece haksız masa kullanımını ve kaynak israfını önleyebilirim.",
+    "epicName": "",
+    "epicLink": "Masa Rezervasyonu",
+    "storyPoints": 3,
+    "priority": "High",
+    "blockedBy": [5],
+    "acceptanceCriteria": [
+      "Bir kullanıcının zaten aktif bir rezervasyonu varsa, başka bir masaya tıkladığında 'Zaten bir rezervasyonunuz bulunmaktadır' uyarısı çıkmalı ve işlem engellenmeli."
+    ]
+  },
+  {
+    "id": 11,
+    "issueType": "Story",
+    "summary": "Profil Üzerinden Günlük Çalışma Durumu Güncelleme",
+    "description": "Bir Çalışan olarak, günlük çalışma durumumu (Remote, In-Office, Leave) profil panelimden hızlıca değiştirebilmek istiyorum, böylece ekibim benim nerede olduğumu anlık olarak görebilir.",
+    "epicName": "",
+    "epicLink": "Akıllı Takvim",
+    "storyPoints": 3,
+    "priority": "High",
+    "blockedBy": [6],
+    "acceptanceCriteria": [
+      "Kullanıcı profil kartındaki açılır menüden durumunu güncelleyebilmeli.",
+      "Güncelleme yapıldığında ekip takvimindeki durum ikonu ve İK analitik verileri anında değişmeli."
+    ]
+  }
+]

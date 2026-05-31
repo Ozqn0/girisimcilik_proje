@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baskı Durumu Sorgula | TaskFlow Press</title>
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="press-theme">
+    
+    <!-- Top CMYK Calibration Color Bar -->
+    <div class="cmyk-calibration-bar">
+        <span class="cmyk-cyan"></span>
+        <span class="cmyk-magenta"></span>
+        <span class="cmyk-yellow"></span>
+        <span class="cmyk-key"></span>
+        <span class="cmyk-cyan-light"></span>
+        <span class="cmyk-magenta-light"></span>
+        <span class="cmyk-yellow-light"></span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="press-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="brand-logo-stamp">🖨️</div>
+                <div class="brand-text-wrapper">
+                    <span class="brand-title">TaskFlow Press</span>
+                    <span class="brand-subtitle">Mücellithane & Baskı Evi</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Ana Sayfa</a>
+                <a href="plan_ekle.html" class="nav-link">Sipariş Oluştur</a>
+                <a href="durum_sorgula.html" class="nav-link active">Baskı Durumu Sorgula</a>
+                <a href="admin_paneli.html" class="nav-link">Yönetici Konsolu</a>
+            </div>
+            <div class="nav-cta">
+                <a href="plan_ekle.html" class="btn btn-ink">Sipariş Oluştur</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="page-main">
+        <section class="section-container card-focused-layout">
+            
+            <div class="press-tracking-wrapper">
+                
+                <div class="search-header-press">
+                    <h2>🔍 Baskı Aşaması Takip Portalı</h2>
+                    <p>Siparişinizin (planlamanın) mürekkep ve ciltleme aşamasını sorgulamak için <b>PLN-XXXXX</b> kodunu girin.</p>
+                </div>
+                
+                <!-- Query Box -->
+                <div class="press-search-panel">
+                    <div class="search-form-row">
+                        <input type="text" id="tracking-code-input" placeholder="ÖRN: PLN-10827" maxlength="9">
+                        <button class="btn btn-ink" onclick="queryPlanStatus()">Durumu Sorgula</button>
+                    </div>
+                </div>
+
+                <!-- Error feedback (Hidden initially) -->
+                <div id="query-error-box" class="query-feedback-box error-box hidden">
+                    <span class="fb-icon">⚠️</span>
+                    <span id="query-error-text">İlgili baskı kodu bulunamadı. Lütfen numarayı kontrol edin.</span>
+                </div>
+
+                <!-- Results Grid (İrsaliye Makbuzu ve CMYK Zaman Tüneli) -->
+                <div id="query-results-box" class="query-results-press hidden">
+                    
+                    <!-- Left Column: Printed Invoice Style details -->
+                    <div class="invoice-details-sheet">
+                        <div class="invoice-decor-top"></div>
+                        <div class="invoice-inner">
+                            <div class="invoice-header">
+                                <span class="inv-badge">SEVK İRSALİYESİ</span>
+                                <h3 id="res-plan-code">PLN-10827</h3>
+                                <div class="inv-dotted-line"></div>
+                            </div>
+                            
+                            <div class="inv-info-block">
+                                <div class="inv-row">
+                                    <span class="inv-lbl">SİPARİŞ BAŞLIĞI:</span>
+                                    <span class="inv-val" id="res-plan-title">Bulut Altyapı Göçü Planı</span>
+                                </div>
+                                <div class="inv-row">
+                                    <span class="inv-lbl">DEPARTMAN / BİRİM:</span>
+                                    <span class="inv-val" id="res-plan-department">Dizgi & Tasarım</span>
+                                </div>
+                                <div class="inv-row">
+                                    <span class="inv-lbl">SORUMLU USTA:</span>
+                                    <span class="inv-val" id="res-plan-responsible">Kaan Aydın (Veri Analisti)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="inv-dotted-line"></div>
+                            
+                            <div class="inv-desc-block">
+                                <span class="inv-lbl">İŞ DETAYLARI / TALİMATLAR:</span>
+                                <p id="res-plan-description">Yerel sunuculardaki veritabanı ve servislerin AWS Cloud ortamına taşınması ve yedekleme yapılandırması.</p>
+                            </div>
+                            
+                            <!-- Calibration check box visual -->
+                            <div class="inv-calibration-cross">
+                                <span>⊕ TARGET OK</span>
+                                <span class="stamp-received">İŞLENDİ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: CMYK Cylinder Timeline -->
+                    <div class="cmyk-cylinder-timeline-card">
+                        <h4>Merdane & Renk Kalıbı İlerleme Durumu</h4>
+                        
+                        <div class="cmyk-vertical-stepper" id="tracking-timeline">
+                            
+                            <!-- Step 1: C (Cyan) -->
+                            <div class="cmyk-step-node" id="step-node-1">
+                                <div class="cmyk-indicator">
+                                    <div class="cmyk-circle color-cyan">C</div>
+                                    <div class="cmyk-line line-cyan"></div>
+                                </div>
+                                <div class="cmyk-info">
+                                    <div class="cmyk-meta">
+                                        <h5>İlgili Departmana İletiliyor (Cyan)</h5>
+                                        <span class="cmyk-status-badge badge-c" id="step-badge-1">Beklemede</span>
+                                    </div>
+                                    <p>İş emri oluşturuldu ve sorumlu departman ustasına yönlendirildi.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: M (Magenta) -->
+                            <div class="cmyk-step-node" id="step-node-2">
+                                <div class="cmyk-indicator">
+                                    <div class="cmyk-circle color-magenta">M</div>
+                                    <div class="cmyk-line line-magenta"></div>
+                                </div>
+                                <div class="cmyk-info">
+                                    <div class="cmyk-meta">
+                                        <h5>Sipariş Oluşturuluyor (Magenta)</h5>
+                                        <span class="cmyk-status-badge badge-m" id="step-badge-2">Beklemede</span>
+                                    </div>
+                                    <p>Baskı malzemeleri, kağıt ve kalıplar hazırlanıyor, iş sıraya alınıyor.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Y (Yellow) -->
+                            <div class="cmyk-step-node" id="step-node-3">
+                                <div class="cmyk-indicator">
+                                    <div class="cmyk-circle color-yellow">Y</div>
+                                    <div class="cmyk-line line-yellow"></div>
+                                </div>
+                                <div class="cmyk-info">
+                                    <div class="cmyk-meta">
+                                        <h5>Sipariş Tamamlandı (Yellow)</h5>
+                                        <span class="cmyk-status-badge badge-y" id="step-badge-3">Beklemede</span>
+                                    </div>
+                                    <p>Baskı presi çalıştırıldı, üretim ve ciltleme işlemleri tamamlandı.</p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: K (Key / Black Ink) -->
+                            <div class="cmyk-step-node" id="step-node-4">
+                                <div class="cmyk-indicator">
+                                    <div class="cmyk-circle color-key">K</div>
+                                </div>
+                                <div class="cmyk-info">
+                                    <div class="cmyk-meta">
+                                        <h5>Sipariş Teslim Edildi (Key)</h5>
+                                        <span class="cmyk-status-badge badge-k" id="step-badge-4">Beklemede</span>
+                                    </div>
+                                    <p>Sipariş paketlendi, sevkiyat birimine aktarıldı ve müşteriye teslim edildi.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="press-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <span class="footer-brand-text">TaskFlow Press</span>
+                <p>Matbaa ve Ofset Süreç Takip Sistemi</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2026 TaskFlow Press. Girişimcilik ve Proje Yönetimi Projesidir.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

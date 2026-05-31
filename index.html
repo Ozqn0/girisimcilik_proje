@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow Press | Matbaa & Süreç Yönetim Portalı</title>
+    <!-- Google Fonts: Playfair Display (Serif) & Inter (Sans-serif) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="press-theme">
+    
+    <!-- Top CMYK Calibration Color Bar (Traditional Print Mark) -->
+    <div class="cmyk-calibration-bar">
+        <span class="cmyk-cyan"></span>
+        <span class="cmyk-magenta"></span>
+        <span class="cmyk-yellow"></span>
+        <span class="cmyk-key"></span>
+        <span class="cmyk-cyan-light"></span>
+        <span class="cmyk-magenta-light"></span>
+        <span class="cmyk-yellow-light"></span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="press-navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="brand-logo-stamp">🖨️</div>
+                <div class="brand-text-wrapper">
+                    <span class="brand-title">TaskFlow Press</span>
+                    <span class="brand-subtitle">Mücellithane & Baskı Evi</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Ana Sayfa</a>
+                <a href="plan_ekle.html" class="nav-link">Sipariş Oluştur</a>
+                <a href="durum_sorgula.html" class="nav-link">Baskı Durumu Sorgula</a>
+                <a href="admin_paneli.html" class="nav-link">Yönetici Konsolu</a>
+            </div>
+            <div class="nav-cta">
+                <a href="plan_ekle.html" class="btn btn-ink">Sipariş Oluştur</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="page-main">
+        
+        <!-- Hero Section -->
+        <section class="press-hero">
+            <div class="hero-container">
+                
+                <!-- Hero Left: Editorial style content -->
+                <div class="hero-left">
+                    <div class="editorial-badge">
+                        <span class="align-mark">⊕</span>
+                        <span>Ofset Baskı ve Süreç Planlama Sistemi</span>
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        İş ve Baskı<br>
+                        <span class="ink-magenta">Süreçlerinizi</span><br>
+                        Kalıplara Dökün
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Süreç planlarınızı matbaa iş emirleri titizliğiyle oluşturun. Dört renk baskı (CMYK) aşamalarıyla işlerinizin durumunu anlık sorgulayın, ofset yoğunluğunu ve teslimat süreçlerini canlı takip edin.
+                    </p>
+                    
+                    <div class="hero-actions">
+                        <a href="plan_ekle.html" class="btn btn-ink btn-lg">➕ Yeni Sipariş Oluştur</a>
+                        <a href="durum_sorgula.html" class="btn btn-ink-outline btn-lg">🔍 Durum Sorgula</a>
+                    </div>
+                    
+                    <div class="hero-bullets">
+                        <span class="bullet-item"><span class="cmyk-dot cyan"></span> Kalıp Hazırlama</span>
+                        <span class="bullet-item"><span class="cmyk-dot magenta"></span> Mürekkep Ayarı</span>
+                        <span class="bullet-item"><span class="cmyk-dot yellow"></span> Ciltleme ve Teslim</span>
+                    </div>
+                </div>
+
+                <!-- Hero Right: Editorial Graphic Card representing print steps -->
+                <div class="hero-right">
+                    <div class="press-plate-card">
+                        <div class="card-borders">
+                            <span class="corner-mark top-left">└</span>
+                            <span class="corner-mark top-right">┘</span>
+                            <span class="corner-mark bottom-left">┌</span>
+                            <span class="corner-mark bottom-right">┐</span>
+                        </div>
+                        
+                        <div class="plate-header">
+                            <h4>İŞ AKIŞ KALIPLARI (CMYK)</h4>
+                            <span class="plate-serial">REF-2026/05</span>
+                        </div>
+                        
+                        <div class="plate-details-list">
+                            <div class="plate-detail-row">
+                                <span class="plate-dot cyan">C</span>
+                                <div class="plate-info">
+                                    <h5>İlgili Departmana İletiliyor</h5>
+                                    <p>İş emri oluşturulur ve sorumlu departman ustasına yönlendirilir.</p>
+                                </div>
+                            </div>
+                            <div class="plate-detail-row">
+                                <span class="plate-dot magenta">M</span>
+                                <div class="plate-info">
+                                    <h5>Sipariş Oluşturuluyor</h5>
+                                    <p>Baskı malzemeleri, kağıt ve kalıplar hazırlanarak iş sıraya alınır.</p>
+                                </div>
+                            </div>
+                            <div class="plate-detail-row">
+                                <span class="plate-dot yellow">Y</span>
+                                <div class="plate-info">
+                                    <h5>Sipariş Tamamlandı</h5>
+                                    <p>Baskı presi çalıştırılır, üretim ve ciltleme işlemleri tamamlanır.</p>
+                                </div>
+                            </div>
+                            <div class="plate-detail-row">
+                                <span class="plate-dot key">K</span>
+                                <div class="plate-info">
+                                    <h5>Sipariş Teslim Edildi</h5>
+                                    <p>Sipariş paketlenir, sevkiyat birimiyle müşteriye ulaştırılır.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Registration Marks decoration -->
+                        <div class="registration-marks-row">
+                            <span class="reg-mark">⌖</span>
+                            <span class="reg-mark">⌖</span>
+                            <span class="reg-mark">⌖</span>
+                            <span class="reg-mark">⌖</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Matbaa Services Section -->
+        <section class="press-services">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Hizmetlerimiz</span>
+                    <h2>Basımevi Süreç Yönetim Alanları</h2>
+                    <p>Süreç planlamanızı matbaacılık disipliniyle 4 temel bölüme ayırıyoruz:</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card-editorial">
+                        <div class="svc-icon-stamp">C</div>
+                        <h3>İletiliyor</h3>
+                        <p>Fikirlerin ve iş emirlerinin sisteme girilerek ilgili departman ustalarına atanması.</p>
+                    </div>
+                    <div class="service-card-editorial">
+                        <div class="svc-icon-stamp">M</div>
+                        <h3>Sipariş Oluşturuluyor</h3>
+                        <p>Kayıtların yapılması, mürekkep yoğunluk ayarı, kâğıt tedariki ve hazırlık aşaması.</p>
+                    </div>
+                    <div class="service-card-editorial">
+                        <div class="svc-icon-stamp">Y</div>
+                        <h3>Sipariş Tamamlandı</h3>
+                        <p>Silindirlerin basımı tamamlaması, kesim, ciltleme ve ürünün hazır hâle gelmesi.</p>
+                    </div>
+                    <div class="service-card-editorial">
+                        <div class="svc-icon-stamp">K</div>
+                        <h3>Sipariş Teslim Edildi</h3>
+                        <p>Basılan ürünlerin özenle paketlenmesi, sevkiyat birimine ve müşteriye teslim edilmesi.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="press-cta">
+            <div class="cta-container">
+                <div class="cta-inner-sheet">
+                    <h2>Baskı Siparişiniz Hazır mı?</h2>
+                    <p>Hemen iş bilgilerini ve departman detaylarını girin, sürecinizi adım adım takip edebileceğiniz bir PLN kodu oluşturun.</p>
+                    <div class="cta-buttons">
+                        <a href="plan_ekle.html" class="btn btn-ink btn-lg">➕ Yeni Sipariş Oluştur</a>
+                        <a href="durum_sorgula.html" class="btn btn-ink-outline btn-lg">🔍 Durum Sorgula</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="press-footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <span class="footer-brand-text">TaskFlow Press</span>
+                <p>Matbaa ve Ofset Süreç Takip Sistemi</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2026 TaskFlow Press. Girişimcilik ve Proje Yönetimi Projesidir.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
